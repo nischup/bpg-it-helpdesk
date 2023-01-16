@@ -1,0 +1,25 @@
+<?php
+
+return array (
+  'Dashboard' => 'Dashboard',
+  'Default' => 'Default',
+  'Analytics' => 'Analytics',
+  'E-Commerce' => 'E-Commerce',
+  'SaaS' => 'SaaS',
+  'System' => 'System',
+  'Administrator' => 'Administrator',
+  'Users' => 'Users',
+  'Roles' => 'Roles',
+  'Permissions' => 'Permissions',
+  'Settings' => 'Settings',
+  'Language' => 'Language',
+  'Category' => 'Category',
+  'Company' => 'Company',
+  'Status' => 'Status',
+  'Priority' => 'Priority',
+  // 'Catalog' => 'Catalog',
+  // 'Subscription' => 'Subscription',
+  'Project' => 'Project',
+  'Severity' => 'Severity',
+  'Project Module' => 'Project Module',
+);
