@@ -285,6 +285,7 @@
                         <th scope="col">Priority</th>
                         <th scope="col">Status</th>
                         <th scope="col">Created Date</th>
+                        <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -331,6 +332,9 @@
                         </td>
                         <td>
                           {{date('j, M Y',strtotime($ticketdata['created_at'])) }}
+                        </td>
+                        <td>
+                          <a class="badge bg-info" href="{{ route('frontend.ticket-replies-to-user', $ticketdata['ticket_id']) }}"> <i class="ri-feedback-line"></i> Replay </a> 
                         </td>
                       </tr>
 

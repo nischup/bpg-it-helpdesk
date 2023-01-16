@@ -58,7 +58,7 @@
                 <div class="col-md-4" @if($task_category != 1) style="display: none" @endif>
                    <label for="inputState" class="form-label" wire:ignore >Project</label>
                       <select id="inputState" class="form-select" wire:model.defer="project" wire:click="projectToModule($event.target.value)">
-                       <option selected>{{ __('Select Project') }}</option>
+                       <option selected disabled>{{ __('Select Project') }}</option>
                             @foreach($projects as $item)
                                 <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                             @endforeach
@@ -69,24 +69,28 @@
 
                 <div class="col-md-4" @if($task_category != 1) style="display: none" @endif>
                    <label for="inputState" class="form-label" wire:ignore >Module Name</label>
-                      <select id="inputState" class="form-select" wire:model="project_module">
-                       <option selected>{{ __('Select Project Module') }}</option>
+                      <select id="inputState" class="form-select" wire:model="project_module" wire:click="ModuleToPage($event.target.value)">
+                       <option selected disabled>{{ __('Select Project Module') }}</option>
                             @foreach($project_modules as $item)
                                 <option value="{{ $item['id'] }}">{{ $item['title'] }}</option>
                             @endforeach
                       </select>
-                      @error('project_module') <span class="text-danger error">{{ $message }}</span> @enderror
                 </div>    
 
                 <div class="col-md-4" @if($task_category != 1) style="display: none" @endif>
                    <label for="inputState" class="form-label" wire:ignore >Page Name</label>
-                    <input type="text" class="form-control" id="inputAddres5s" wire:model="page_name" placeholder="Page Name">
+                    <select id="inputState" class="form-select" wire:model="page_name">
+                    <option selected disabled>{{ __('Select Module Name') }}</option>
+                            @foreach($project_module_pages as $item)
+                                <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                            @endforeach
+                      </select>
                 </div>                
 
         {{--         <div class="col-md-4">
                    <label for="inputState" class="form-label">Attachment</label>
                     <select id="inputState" class="form-select">
-                      <option selected>Choose one...</option>
+                      <option selected disabled>Choose one...</option>
                       <option>...</option>
                     </select>
                 </div> --}}
@@ -103,19 +107,19 @@
                 </div>
 
 
-                <div class="col-md-4">
+   {{--              <div class="col-md-4">
                   <label for="inputState" class="form-label">Status</label>
                   <select id="inputState" class="form-select" wire:model="status_id">
                       <option value="">{{ __('Select status') }}</option>
                             @foreach($status as $item)
-                                <option selected value="{{ $item['id'] }}">{{ $item['title'] }}</option>
+                                <option selected disabled value="{{ $item['id'] }}">{{ $item['title'] }}</option>
                             @endforeach
                         </select>
                         @error('status_id') <span class="text-danger error">{{ $message }}</span> @enderror
-                </div>
+                </div> --}}
 
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <label for="inputState" class="form-label">Priority</label>
                   <select id="inputState" class="form-select" wire:model="priority_id">
                        <option value="">{{ __('Select Priority') }}</option>
@@ -127,7 +131,7 @@
                 </div>
 
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <label for="inputState" class="form-label">Severity</label>
                   <select id="inputState" class="form-select" wire:model="severity_id">
                    <option value="">{{ __('Select severity') }}</option>

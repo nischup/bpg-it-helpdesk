@@ -15,6 +15,7 @@ use App\Models\City;
 use App\Models\Company;
 use App\Models\Project;
 use App\Models\ProjectModule;
+use App\Models\ModulePage;
 use App\Models\Catalogue;
 use App\Services\AuctionService;
 use App\Services\ImageService;
@@ -31,6 +32,7 @@ class NewTicket extends Component
     public $category_column, $child_categories;
     public $projects = [];
     public $project_modules = [];
+    public $project_module_pages = [];
     public $cities = [];
     public $subject, $brand;
     public $products = [];
@@ -81,7 +83,7 @@ class NewTicket extends Component
         $this->validate([
             'subject' => 'required',
             'task_category' => 'required',
-            'status_id' => 'required',
+            'status_id' => 'nullable',
             'severity_id' => 'required',
             'priority_id' => 'required',
         ]);
@@ -97,10 +99,10 @@ class NewTicket extends Component
                 'company_id' => $this->company_id,
                 'project_id' => $this->project,
                 'module_id' => $this->project_module,
-                'page_name' => $this->page_name,
+                'page_id' => $this->page_name,
                 'remarks' => $this->remarks,
                 'issue_details' => $this->issue_details,
-                'status_id' => $this->status_id,
+                'status_id' => 1,
                 'priority_id' => $this->priority_id,
                 'severity_id' => $this->severity_id,
             ]);;
@@ -147,6 +149,15 @@ class NewTicket extends Component
         }
 
        $this->project_modules = ProjectModule::select('id', 'title')->where('project_id', $value)->get()->toArray();
+    }    
+
+    public function ModuleToPage($value)
+    {
+        if (!$value) {
+            return;
+        }
+
+       $this->project_module_pages = ModulePage::select('id', 'name')->where('module_id', $value)->get()->toArray();
     }
 
 

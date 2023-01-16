@@ -125,6 +125,8 @@ Route::middleware(['auth', 'profile_status'])->group(function () {
             Route::get('/assign-ticket-to-user/{id}', [PagesController::class, 'assignedTicketToUser'])->name('frontend.assign-ticket-to-user');
             Route::post('assignSubmit', [PagesController::class, 'assignSubmit'])->name('frontend.assignSubmit');
 
+            Route::get('/ticket-replies/{id}', [PagesController::class, 'ticketReplies'])->name('frontend.ticket-replies-to-user');
+
             Route::get('/favorites', [FavoriteController::class, 'index'])->name('frontend.dashboard.favorites');
             Route::get('/favorites/{id}/store', [FavoriteController::class, 'store'])->name('frontend.favorites.store');
             Route::get('/favorites/{id}/delete', [FavoriteController::class, 'destroy'])->name('frontend.favorites.delete');

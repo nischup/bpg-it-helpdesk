@@ -155,6 +155,42 @@ class PagesController extends Controller
             'project_modules' => $project_modules,
             'user' => $user,
         ]);
+    }    
+
+    public function ticketReplies($id, Request $request)
+    {
+        if (!$request->id) {
+            abort(404);
+        }
+
+        // if (!profileStatusCompleted()) {
+        //     session()->flash('error', __('You must complete your profile before creating ticket'));
+        //     return redirect()->route('frontend.profile');
+        // }
+
+        $ticket = Ticket::with('category', 'company', 'project', 'project_module', 'user', 'status', 'priority', 'severity')->findOrFail($request->id);
+        // dd($ticket->status);
+        $status = Status::whereNotIn('id', ['1'])->get();
+        $priority = Priority::get();
+        $severity = Severity::get();
+        $category = Category::where('parent_id', '0')->get();
+        $companies = Company::get();
+        $projects = Project::get();
+        $project_modules = ProjectModule::get();
+        $companies = Company::get();
+        $user = User::where('is_active', '1')->get();
+
+        return view('frontend.repliey-user-ticket',[
+            'ticket' => $ticket,
+            'status' => $status,
+            'priority' => $priority,
+            'severity' => $severity,
+            'category' => $category,
+            'companies' => $companies,
+            'projects' => $projects,
+            'project_modules' => $project_modules,
+            'user' => $user,
+        ]);
     }
 
 
